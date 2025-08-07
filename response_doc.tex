@@ -1,0 +1,23 @@
+Reviewer 3 response:
+
+We observed little difference in the performance of both algorithms when tuning the convexity parameter $\theta$. In our initial experiment, $\theta := 10^{-5} + \max{0, -\lambda_{\min}}$. We parameterize $\theta$ as $\theta_g := g + \max{0, -\lambda_{\min}}$ where $g \in \{0, 10^{-5}, 10^{-1}\}$. $g$ now dictates the convexity of the regularized global function; when $g = 0$, $f$ is merely convex. For $g > 0$, $f$ is $\theta$-strongly convex.
+
+CHECK THE ABOVE PARAGRAPH.
+
+When plotting each of the plots for $\theta_g, g \in \{0, 10^{-5}, 10^{-1}\}$, we do not see any visible performance difference between $\theta_0$ and $\theta_{10^{-5}}$. Furthermore, there is negligible difference as we increase $g$.
+
+INCLUDE PLOTS \begin{verbatim}./convexity-experiment/\end{verbatim} HERE.
+
+
+Reviewer 6 response:
+
+To provide a baseline for comparison against IR-Push-Pull and IR-DSGT, we turn to an Iteratively Regularized Gradient (IRG) method first introduced in [Kaushik, Yousefian 2019] https://arxiv.org/pdf/2007.15845.
+
+We look at a simplification of the aRB-IRG method proposed in the above paper, where a centralized computing agent has knowledge of all players' current state within the Nash game.
+
+\[
+x_{k+1}^{(i)} := \begin{cases}
+    x_k^{(i_k)} - \gamma_k \left( F_{i_k}(x_k) + \eta_k \tilde{\nabla}_{i_k} f(x_k) \right) & \text{if } i = i_k \\
+    x_{k}^{(i)} & \text{if } i \neq i_k
+\end{cases}
+\]
